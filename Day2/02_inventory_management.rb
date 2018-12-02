@@ -10,7 +10,6 @@ until(input.eof?) do
 end
 
 boxesFound = false
-commonLetters = ""
 
 until((boxesFound == true) or (boxIDs.size < 1)) do
     currentID = boxIDs.delete_at(0)
