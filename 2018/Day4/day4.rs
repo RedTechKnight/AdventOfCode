@@ -26,7 +26,9 @@ pub fn main()
   };
 
   let start = Instant::now();
-  let mut data = std::fs::read_to_string("input_day4")
+
+  let mut data = 
+  std::fs::read_to_string("input_day4")
   .map( |d| 
     d.lines()
     .map( |line| {
@@ -54,8 +56,11 @@ pub fn main()
     )
     .collect::<Vec<_>>()
   ).unwrap();
+
   let mut current_guard = 0;
+
   data.sort();
+  
   let guards = 
   data
   .into_iter()
@@ -111,145 +116,6 @@ pub fn main()
     k*v.0
   )
   );
-  /*
-  let mut guards: HashMap<i32,Guard> = HashMap::new();
-  let mut current_guard = 0;
-  for event in data.iter()
-  {
-    if event.event.contains("Guard")
-    {
-      current_guard =
-      event.event
-      .split(' ')
-      .collect::<Vec<_>>()[2]
-      .chars()
-      .filter(|c| *c != '#')
-      .collect::<String>()
-      .parse::<i32>()
-      .unwrap()
-      ;
-    }
-
-    if event.event.contains("asleep")
-    {
-      guards
-      .entry(current_guard)
-      .and_modify(|guard|
-        guard.sleep_times.push(
-          SleepChange
-          {
-            time:event.minute,
-            day:event.day,
-            month:event.month
-          }
-        )
-      )
-      .or_insert(
-        Guard
-        {
-          id:current_guard,
-          sleep_times:
-          vec![SleepChange {time:event.minute,day:event.day,month:event.month} ],
-          awaken_times:Vec::new(),
-          sleeping:Vec::new()
-        }
-      );
-    }
-
-    if event.event.contains("wakes")
-    {
-      guards
-      .entry(current_guard)
-      .and_modify(|guard|
-        guard.awaken_times.push(
-          SleepChange
-          {
-            time:event.minute,
-            day:event.day,
-            month:event.month
-          }
-        )
-      )
-      .or_insert(
-        Guard
-        {
-          id:current_guard,
-          awaken_times:
-          vec![SleepChange {time:event.minute,day:event.day,month:event.month} ],
-          sleep_times:Vec::new(),
-          sleeping:Vec::new()
-        }
-      );
-    }
-
-  }
-  let mut final_guards:Vec<GuardFinal> = Vec::new();
-  for guard in guards.values_mut()
-  {
-    final_guards.push(
-    GuardFinal
-    {
-      id:guard.id,
-      sleeping:guard.sleep_times.iter().
-    zip(guard.awaken_times.iter())
-    .map(|(a,b)| {
-      if a.day != b.day || a.month != b.month
-      {
-        panic!("Mismatched days!");
-      }
-      GuardSleep {start:a.time,stop:b.time,day:a.day,month:a.month}
-    }
-      )
-    .collect::<Vec<_>>()
-    }
-    );
-  }
-
-  let sleepiest_guard  = final_guards.iter().max_by(|a,b| 
-    a.sleeping.iter().fold(0,|acc,x| acc + (x.stop - x.start) )
-    .cmp(&b.sleeping.iter().fold(0,|acc,x| acc + (x.stop - x.start)))
-  )
-  .unwrap();
- 
-
-  println!("Result: {:?},{:?}",sleepiest_guard.id,sleepiest_guard.sleeping.iter().fold(HashMap::new(),|mut acc,x|
-  {
-    for i in x.start..x.stop
-    {
-      acc.entry(i).and_modify(|e| *e += 1).or_insert(1);
-    }
-      acc
-  }
-  ).iter().max_by(|(_,av),(_,bv)| av.cmp(bv) ).map(|(a,b)| a*sleepiest_guard.id));
-
-  let frequent_sleeper = final_guards.iter().max_by(|a,b| 
-    a.sleeping.iter().fold(HashMap::new(),|mut acc,x| {
-    for i in x.start..x.stop
-    {
-      acc.entry(i).and_modify(|e| *e += 1).or_insert(1);
-    }
-    acc
-    }
-    ).iter().max_by(|(_,av),(_,bv)| av.cmp(bv)).unwrap().1
-    .cmp(
-      b.sleeping.iter().fold(HashMap::new(),|mut acc,x| {
-        for i in x.start..x.stop
-        {
-          acc.entry(i).and_modify(|e| *e += 1).or_insert(1);
-        }
-        acc
-      }).iter().max_by(|(_,av),(_,bv)| av.cmp(bv)).unwrap().1)
-    ).map(|g| g.id * g.sleeping.iter().fold(HashMap::new(),|mut acc,x| {
-    for i in x.start..x.stop
-    {
-      acc.entry(i).and_modify(|e| *e += 1).or_insert(1);
-    }
-    acc
-    }
-    ).iter().max_by(|(_,av),(_,bv)| av.cmp(bv)).unwrap().0);
-
-    println!("{:?}",frequent_sleeper);
-    */
     println!("Time elapsed: {}ms",start.elapsed().as_millis());
 }
 
