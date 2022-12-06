@@ -17,6 +17,7 @@ executable x2022
 	    ,Day3
       ,Day4
       ,Day5
+      ,Day6
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:    base ^>=4.16.3.0
