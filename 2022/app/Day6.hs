@@ -21,6 +21,7 @@ day6 = do
     input <- Text.readFile "inputs/day6"
     putStrLn . mconcat $ ["Day 6: Part 1 => ",show (findMarker 4 0 input)," | Part 2 => ",show (findMarker 14 0 input)]
 
+unique :: Int -> Text -> Bool
 unique len = (==len) . Set.size . Text.foldr Set.insert Set.empty
 
 findMarker :: Int -> Int -> Text -> Int
