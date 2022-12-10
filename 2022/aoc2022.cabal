@@ -8,7 +8,7 @@ author: RedTechKnight
 
 extra-source-files: CHANGELOG.md
 
-executable x2022
+executable aoc2022
     main-is:          Main.hs
 
     -- Modules included in this executable, other than Main.
@@ -19,6 +19,9 @@ executable x2022
       ,Day5
       ,Day6
       ,Day7
+      ,Day8
+      ,Day9
+      ,Day10
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:    base ^>=4.16.3.0
@@ -27,5 +30,6 @@ executable x2022
                     , containers == 0.6.5.1
                     , parsec == 3.1.15.0
                       ,text == 1.2.5.0
+                      ,vector == 0.13.0.0
     hs-source-dirs:   app
     default-language: Haskell2010
